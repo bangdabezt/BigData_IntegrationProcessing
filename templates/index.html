@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Search</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body>
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <h1 class="text-center mb-4">Search Books</h1>
+                <form action="/search" method="post" class="mb-5">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control" placeholder="Enter ISBN, book title, author, publisher, or year" value="{{ query }}">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+                {% if query %}
+                    <h2 class="text-center">Results for "{{ query }}"</h2>
+                {% else %}
+                    <h2 class="text-center">All Books</h2>
+                {% endif %}
+
+                {% if results %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered mt-4">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>ISBN</th>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Publisher</th>
+                                    <th>Year</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in results %}
+                                    <tr>
+                                        <td>{{ row.isbn }}</td>
+                                        <td>{{ row.book_title }}</td>
+                                        <td>{{ row.author }}</td>
+                                        <td>{{ row.publisher }}</td>
+                                        <td>{{ row.year }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning" role="alert">
+                        No results found.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

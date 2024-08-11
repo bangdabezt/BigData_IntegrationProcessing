@@ -1,0 +1,23 @@
+/* custom.css */
+
+body {
+    background-color: #f8f9fa;
+}
+
+h1, h2 {
+    color: #343a40;
+}
+
+.table {
+    background-color: #ffffff;
+    width: 100%; /* Make the table take the full width of the container */
+    table-layout: auto; /* Allow table to adjust column width based on content */
+}
+
+.table th, .table td {
+    padding: 15px; /* Increase padding for better readability */
+}
+
+.alert {
+    margin-top: 20px;
+}
